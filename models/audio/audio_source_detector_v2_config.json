@@ -1,0 +1,13 @@
+{
+    "sample_rate": 16000,
+    "clip_seconds": 3,
+    "n_mels": 64,
+    "n_fft": 1024,
+    "hop_length": 256,
+    "classes": {
+        "0": "drone_only",
+        "1": "source_present"
+    },
+    "best_epoch": 2,
+    "best_validation_accuracy": 0.953125
+}

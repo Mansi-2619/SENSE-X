@@ -1,0 +1,43 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Large raw datasets
+data/raw/
+*.csv
+
+# Generated/cache files
+.cache/
+*.log
+
+# Environment/secrets
+.env
+.env.*
+
+# Dataset artifacts - do not push
+data/raw/
+data/processed/
+data/cache/
+
+# Training outputs
+runs/
+
+# Large ML artifacts
+*.npy
+*.npz
+
+# Local backups
+app_BEFORE_RANGE_FIX.py
+app_WORKING.py
+
+# Evaluation outputs
+radar_evaluation_results.csv

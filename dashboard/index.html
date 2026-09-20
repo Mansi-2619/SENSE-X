@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="SENSE-X Autonomous Multimodal Search and Rescue Command Interface"
+    >
+
+    <title>SENSE-X // Rescue Command</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+    <!-- =====================================================
+         TOP COMMAND BAR
+         ===================================================== -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-symbol">
+                <span>✦</span>
+            </div>
+
+            <div>
+                <div class="brand-kicker">
+                    AUTONOMOUS PERCEPTION SYSTEM
+                </div>
+
+                <div class="brand-title">
+                    SENSE-X
+                    <span>/ RESCUE COMMAND</span>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="mission-header">
+
+            <div class="mission-meta">
+                <span>MISSION</span>
+                <strong>SX-001</strong>
+            </div>
+
+            <div class="mission-meta">
+                <span>MODE</span>
+                <strong>SEARCH &amp; RESCUE</strong>
+            </div>
+
+            <div class="mission-meta">
+                <span>OBSERVATION</span>
+                <strong id="observationNumber">—</strong>
+            </div>
+
+            <div class="mission-meta">
+                <span>MISSION TIME</span>
+                <strong id="missionClock">00:00:00</strong>
+            </div>
+
+            <div
+                class="system-status"
+                id="systemStatus"
+            >
+                <i></i>
+                SYSTEM READY
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN COMMAND GRID
+         ===================================================== -->
+
+    <main>
+
+        <section class="main-grid">
+
+
+            <!-- =================================================
+                 MISSION SPACE
+                 ================================================= -->
+
+            <section class="panel mission-panel">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <span class="section-code">
+                            01 / MISSION SPACE
+                        </span>
+
+                        <h2>
+                            Autonomous Search Area
+                        </h2>
+                    </div>
+
+                    <div class="live-indicator">
+                        <span></span>
+                        LIVE
+                    </div>
+
+                </div>
+
+
+                <div class="mission-map">
+
+                    <div class="map-grid"></div>
+
+                    <div class="radar-circle radar-circle-1"></div>
+                    <div class="radar-circle radar-circle-2"></div>
+                    <div class="radar-circle radar-circle-3"></div>
+                    <div class="radar-circle radar-circle-4"></div>
+
+                    <div class="axis axis-x"></div>
+                    <div class="axis axis-y"></div>
+
+                    <div class="radar-sweep"></div>
+
+
+                    <!-- UAV -->
+
+                    <div
+                        class="uav-marker"
+                        id="uavMarker"
+                    >
+
+                        <div class="uav-pulse"></div>
+
+                        <div class="uav-icon">
+                            ✦
+                        </div>
+
+                        <div class="marker-label">
+                            UAV-01
+                        </div>
+
+                    </div>
+
+
+                    <!-- HUMAN TARGET -->
+
+                    <div
+                        class="target-marker hidden-target"
+                        id="targetMarker"
+                    >
+
+                        <div class="target-ring"></div>
+
+                        <div class="target-core"></div>
+
+                        <div class="target-label">
+                            HUMAN-01
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="bearing-line"
+                        id="bearingLine"
+                    ></div>
+
+
+                    <div class="map-info map-info-top-left">
+
+                        <span>SENSOR SPACE</span>
+
+                        <strong>
+                            LOCAL FRAME
+                        </strong>
+
+                    </div>
+
+
+                    <div class="map-info map-info-top-right">
+
+                        <span>UAV ALTITUDE</span>
+
+                        <strong id="uavAltitude">
+                            10.00 m
+                        </strong>
+
+                    </div>
+
+
+                    <div class="map-info map-info-bottom-left">
+
+                        <span>UAV POSITION</span>
+
+                        <strong id="uavCoordinates">
+                            X 0.00 / Y 0.00 / Z 10.00
+                        </strong>
+
+                    </div>
+
+
+                    <div class="map-info map-info-bottom-right">
+
+                        <span>TARGET BEARING</span>
+
+                        <strong id="targetBearing">
+                            ACQUIRING
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MISSION PIPELINE -->
+
+                <div class="mission-flow">
+
+                    <div
+                        class="flow-step active"
+                        data-step="1"
+                    >
+                        <span>01</span>
+                        OBSERVE
+                    </div>
+
+                    <div class="flow-line"></div>
+
+                    <div
+                        class="flow-step"
+                        data-step="2"
+                    >
+                        <span>02</span>
+                        FUSE
+                    </div>
+
+                    <div class="flow-line"></div>
+
+                    <div
+                        class="flow-step"
+                        data-step="3"
+                    >
+                        <span>03</span>
+                        ASSESS
+                    </div>
+
+                    <div class="flow-line"></div>
+
+                    <div
+                        class="flow-step"
+                        data-step="4"
+                    >
+                        <span>04</span>
+                        REPOSITION
+                    </div>
+
+                    <div class="flow-line"></div>
+
+                    <div
+                        class="flow-step"
+                        data-step="5"
+                    >
+                        <span>05</span>
+                        CONFIRM
+                    </div>
+
+                    <div class="flow-line"></div>
+
+                    <div
+                        class="flow-step"
+                        data-step="6"
+                    >
+                        <span>06</span>
+                        INVESTIGATE
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 RIGHT INTELLIGENCE COLUMN
+                 ================================================= -->
+
+            <aside class="intelligence-column">
+
+
+                <!-- TARGET INTELLIGENCE -->
+
+                <section class="panel">
+
+                    <div class="panel-heading compact">
+
+                        <div>
+                            <span class="section-code">
+                                TARGET INTELLIGENCE
+                            </span>
+
+                            <h3>
+                                Human Presence
+                            </h3>
+                        </div>
+
+                    </div>
+
+
+                    <div class="confidence-header">
+
+                        <strong
+                            class="confidence-number"
+                            id="confidenceValue"
+                        >
+                            0.0000
+                        </strong>
+
+                        <span
+                            class="decision-badge standby"
+                            id="decisionBadge"
+                        >
+                            STANDBY
+                        </span>
+
+                    </div>
+
+
+                    <div class="confidence-track">
+
+                        <div
+                            class="confidence-fill"
+                            id="confidenceFill"
+                            style="width: 0%"
+                        ></div>
+
+                    </div>
+
+
+                    <div class="intel-grid">
+
+                        <div class="intel-item">
+                            <span>PRIORITY</span>
+                            <strong id="priorityValue">
+                                —
+                            </strong>
+                        </div>
+
+                        <div class="intel-item">
+                            <span>UNCERTAINTY</span>
+                            <strong id="uncertaintyValue">
+                                —
+                            </strong>
+                        </div>
+
+                        <div class="intel-item">
+                            <span>LOCALIZATION</span>
+                            <strong id="localizationConfidence">
+                                —
+                            </strong>
+                        </div>
+
+                        <div class="intel-item">
+                            <span>RANGE</span>
+                            <strong id="rangeValue">
+                                —
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- SENSOR INTELLIGENCE -->
+
+                <section class="panel">
+
+                    <div class="panel-heading compact">
+
+                        <div>
+                            <span class="section-code">
+                                02 / SENSOR INTELLIGENCE
+                            </span>
+
+                            <h3>
+                                Multimodal Evidence
+                            </h3>
+                        </div>
+
+                    </div>
+
+
+                    <!-- THERMAL -->
+
+                    <div class="sensor-row">
+
+                        <div class="sensor-symbol">
+                            T
+                        </div>
+
+                        <div>
+
+                            <div class="sensor-title">
+                                THERMAL / FLIR
+                            </div>
+
+                            <div class="sensor-subtitle">
+                                Human detection
+                            </div>
+
+                            <div class="mini-track">
+                                <div
+                                    class="mini-fill"
+                                    id="thermalEvidenceBar"
+                                    style="width:0%"
+                                ></div>
+                            </div>
+
+                        </div>
+
+                        <div class="sensor-value">
+
+                            <strong id="thermalEvidence">
+                                0.0000
+                            </strong>
+
+                            <span id="thermalStatus">
+                                WAITING
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- RADAR -->
+
+                    <div class="sensor-row">
+
+                        <div class="sensor-symbol">
+                            R
+                        </div>
+
+                        <div>
+
+                            <div class="sensor-title">
+                                UWB RADAR
+                            </div>
+
+                            <div class="sensor-subtitle">
+                                Human presence
+                            </div>
+
+                            <div class="mini-track">
+                                <div
+                                    class="mini-fill"
+                                    id="radarEvidenceBar"
+                                    style="width:0%"
+                                ></div>
+                            </div>
+
+                        </div>
+
+                        <div class="sensor-value">
+
+                            <strong id="radarEvidence">
+                                0.0000
+                            </strong>
+
+                            <span id="radarStatus">
+                                WAITING
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- AUDIO -->
+
+                    <div class="sensor-row">
+
+                        <div class="sensor-symbol">
+                            A
+                        </div>
+
+                        <div>
+
+                            <div class="sensor-title">
+                                ACOUSTIC ARRAY
+                            </div>
+
+                            <div class="sensor-subtitle">
+                                Source evidence
+                            </div>
+
+                            <div class="mini-track">
+                                <div
+                                    class="mini-fill"
+                                    id="audioEvidenceBar"
+                                    style="width:0%"
+                                ></div>
+                            </div>
+
+                        </div>
+
+                        <div class="sensor-value">
+
+                            <strong id="audioEvidence">
+                                0.0000
+                            </strong>
+
+                            <span id="audioStatus">
+                                WAITING
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- LOCALIZATION -->
+
+                <section class="panel">
+
+                    <div class="panel-heading compact">
+
+                        <div>
+                            <span class="section-code">
+                                03 / LOCALIZATION
+                            </span>
+
+                            <h3>
+                                Target Geometry
+                            </h3>
+                        </div>
+
+                    </div>
+
+
+                    <div class="localization-main">
+
+                        <div>
+
+                            <span class="metric-label">
+                                TARGET BEARING
+                            </span>
+
+                            <strong
+                                class="bearing-number"
+                                id="bearingValue"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div
+                            class="localization-lock"
+                            id="lockStatus"
+                        >
+                            <span></span>
+                            NO LOCK
+                        </div>
+
+                    </div>
+
+
+                    <div class="coordinate-grid">
+
+                        <div>
+                            <span>X</span>
+                            <strong id="coordinateX">
+                                —
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Y</span>
+                            <strong id="coordinateY">
+                                —
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Z</span>
+                            <strong id="coordinateZ">
+                                —
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </aside>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             ADVANCED PERCEPTION SPACE
+             ===================================================== -->
+
+        <section class="perception-grid">
+
+
+            <!-- =================================================
+                 THERMAL TARGET ACQUISITION
+                 ================================================= -->
+
+            <section class="panel">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <span class="section-code">
+                            03A / THERMAL PERCEPTION
+                        </span>
+
+                        <h2>
+                            FLIR Target Acquisition
+                        </h2>
+                    </div>
+
+                    <div
+                        class="feed-status"
+                        id="thermalFeedStatus"
+                    >
+                        STANDBY
+                    </div>
+
+                </div>
+
+
+                <div class="thermal-feed-container">
+
+                    <img
+                        id="thermalFeed"
+                        class="thermal-feed"
+                        alt="SENSE-X thermal observation"
+                    >
+
+
+                    <div
+                        class="thermal-crosshair crosshair-x"
+                    ></div>
+
+                    <div
+                        class="thermal-crosshair crosshair-y"
+                    ></div>
+
+
+                    <div
+                        class="thermal-bbox"
+                        id="thermalBbox"
+                    >
+                        <span id="thermalBboxLabel">
+                            HUMAN
+                        </span>
+                    </div>
+
+
+                    <div class="thermal-feed-hud hud-tl">
+                        FLIR / LWIR
+                    </div>
+
+
+                    <div
+                        class="thermal-feed-hud hud-tr"
+                        id="thermalFrameName"
+                    >
+                        NO FRAME
+                    </div>
+
+
+                    <div
+                        class="thermal-feed-hud hud-bl"
+                        id="thermalDetectionCount"
+                    >
+                        DET 0
+                    </div>
+
+
+                    <div
+                        class="thermal-feed-hud hud-br"
+                        id="thermalConfidenceHud"
+                    >
+                        CONF 0.0000
+                    </div>
+
+
+                    <div
+                        class="thermal-no-detection"
+                        id="thermalNoDetection"
+                    >
+                        AWAITING THERMAL OBSERVATION
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 TACTICAL LOCALIZATION
+                 ================================================= -->
+
+            <section class="panel">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <span class="section-code">
+                            03B / TARGET GEOMETRY
+                        </span>
+
+                        <h2>
+                            Tactical Localization
+                        </h2>
+                    </div>
+
+                    <div
+                        class="feed-status"
+                        id="tacticalLockStatus"
+                    >
+                        NO LOCK
+                    </div>
+
+                </div>
+
+
+                <div class="tactical-map">
+
+                    <div class="tactical-map-grid"></div>
+
+                    <div class="tactical-ring r1"></div>
+                    <div class="tactical-ring r2"></div>
+                    <div class="tactical-ring r3"></div>
+
+                    <div class="tactical-axis tax-x"></div>
+                    <div class="tactical-axis tax-y"></div>
+
+
+                    <!-- UAV -->
+
+                    <div
+                        class="tactical-uav"
+                        id="tacticalUav"
+                    >
+
+                        <div class="tactical-uav-pulse"></div>
+
+                        <div class="tactical-uav-core">
+                            ✦
+                        </div>
+
+                        <span>
+                            UAV-01
+                        </span>
+
+                    </div>
+
+
+                    <!-- TARGET -->
+
+                    <div
+                        class="tactical-target"
+                        id="tacticalTarget"
+                    >
+
+                        <div class="tactical-target-ring"></div>
+
+                        <div class="tactical-target-core"></div>
+
+                        <div class="tactical-target-label">
+
+                            HUMAN-01
+
+                            <strong id="tacticalTargetDistance">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BEARING -->
+
+                    <div
+                        class="tactical-bearing-ray"
+                        id="tacticalBearingRay"
+                    ></div>
+
+
+                    <div class="tactical-frame">
+                        LOCAL SENSOR FRAME
+                    </div>
+
+
+                    <div class="tactical-forward">
+                        <span>↑</span>
+                        +X
+                    </div>
+
+                </div>
+
+
+                <div class="tactical-data-grid">
+
+                    <div>
+                        <span>BEARING</span>
+                        <strong id="tacticalBearing">
+                            —
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>RANGE</span>
+                        <strong id="tacticalRange">
+                            —
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>TARGET X</span>
+                        <strong id="tacticalX">
+                            —
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>TARGET Y</span>
+                        <strong id="tacticalY">
+                            —
+                        </strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             OASF ENGINE
+             ===================================================== -->
+
+        <section class="panel fusion-section">
+
+            <div class="panel-heading">
+
+                <div>
+                    <span class="section-code">
+                        04 / OASF ENGINE
+                    </span>
+
+                    <h2>
+                        Occlusion-Aware Sensor Fusion
+                    </h2>
+                </div>
+
+
+                <div class="environment-info">
+
+                    OCCLUSION
+                    <strong>0.50</strong>
+
+                    &nbsp;&nbsp;
+
+                    NOISE
+                    <strong>0.30</strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="fusion-visual">
+
+
+                <!-- THERMAL NODE -->
+
+                <div class="fusion-node">
+
+                    <span class="fusion-node-title">
+                        THERMAL
+                    </span>
+
+                    <strong id="fusionThermal">
+                        0.0000
+                    </strong>
+
+
+                    <div class="weight-row">
+
+                        <span>WEIGHT</span>
+
+                        <div class="weight-track">
+                            <div
+                                id="thermalWeightBar"
+                                style="width:25%"
+                            ></div>
+                        </div>
+
+                        <b id="thermalWeight">
+                            25%
+                        </b>
+
+                    </div>
+
+                </div>
+
+
+                <div class="fusion-arrow">
+                    →
+                </div>
+
+
+                <!-- OASF CORE -->
+
+                <div class="oasf-core">
+
+                    <div class="core-ring">
+
+                        <span>OASF</span>
+
+                        <strong id="oasfScore">
+                            0.0000
+                        </strong>
+
+                        <div
+                            class="core-decision"
+                            id="oasfDecision"
+                        >
+                            WAITING
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="fusion-arrow">
+                    ←
+                </div>
+
+
+                <!-- RADAR NODE -->
+
+                <div class="fusion-node">
+
+                    <span class="fusion-node-title">
+                        RADAR
+                    </span>
+
+                    <strong id="fusionRadar">
+                        0.0000
+                    </strong>
+
+
+                    <div class="weight-row">
+
+                        <span>WEIGHT</span>
+
+                        <div class="weight-track">
+                            <div
+                                id="radarWeightBar"
+                                style="width:55%"
+                            ></div>
+                        </div>
+
+                        <b id="radarWeight">
+                            55%
+                        </b>
+
+                    </div>
+
+                </div>
+
+
+                <!-- AUDIO NODE -->
+
+                <div class="fusion-node audio-node">
+
+                    <span class="fusion-node-title">
+                        AUDIO
+                    </span>
+
+                    <strong id="fusionAudio">
+                        0.0000
+                    </strong>
+
+
+                    <div class="weight-row">
+
+                        <span>WEIGHT</span>
+
+                        <div class="weight-track">
+                            <div
+                                id="audioWeightBar"
+                                style="width:20%"
+                            ></div>
+                        </div>
+
+                        <b id="audioWeight">
+                            20%
+                        </b>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="ai-explanation">
+
+                <span class="ai-symbol">
+                    ◈
+                </span>
+
+                <div>
+
+                    <span>
+                        OASF EXPLANATION
+                    </span>
+
+                    <p id="fusionExplanation">
+                        Waiting for multimodal observation.
+                    </p>
+
+                    <!-- compatibility with current JS -->
+                    <p
+                        id="aiExplanation"
+                        hidden
+                    >
+                        Waiting for multimodal observation.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             BOTTOM COMMAND GRID
+             ===================================================== -->
+
+        <section class="bottom-grid">
+
+
+            <!-- ACTIVE DECISION -->
+
+            <section class="panel action-panel">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <span class="section-code">
+                            05 / AUTONOMOUS DECISION
+                        </span>
+
+                        <h2>
+                            Active Sensing Controller
+                        </h2>
+                    </div>
+
+                </div>
+
+
+                <div class="action-display">
+
+                    <span class="metric-label">
+                        CURRENT ACTION
+                    </span>
+
+                    <h2 id="missionAction">
+                        STANDBY
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="mission-button"
+                    id="startMissionButton"
+                >
+                    START AUTONOMOUS MISSION
+                </button>
+
+
+                <div class="mission-reason">
+
+                    <span class="metric-label">
+                        DECISION REASON
+                    </span>
+
+                    <p id="missionReason">
+                        System initialized. Awaiting mission start.
+                    </p>
+
+                </div>
+
+
+                <div class="mission-reason">
+
+                    <span class="metric-label">
+                        NEXT STEP
+                    </span>
+
+                    <p id="nextStep">
+                        Await multimodal observation.
+                    </p>
+
+                </div>
+
+
+                <div class="intel-grid">
+
+                    <div class="intel-item">
+                        <span>PRIORITY LEVEL</span>
+                        <strong id="priorityLevel">
+                            —
+                        </strong>
+                    </div>
+
+                    <div class="intel-item">
+                        <span>PRIORITY SCORE</span>
+                        <strong id="priorityScore">
+                            —
+                        </strong>
+                    </div>
+
+                    <div class="intel-item">
+                        <span>FUSION SCORE</span>
+                        <strong id="fusionScore">
+                            0.0000
+                        </strong>
+                    </div>
+
+                    <div class="intel-item">
+                        <span>UAV POSITION</span>
+                        <strong id="uavPosition">
+                            0.00 / 0.00 / 10.00
+                        </strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- EVENT STREAM -->
+
+            <section class="panel event-panel">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <span class="section-code">
+                            06 / EVENT STREAM
+                        </span>
+
+                        <h2>
+                            Mission Log
+                        </h2>
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="clear-button"
+                        id="clearLogButton"
+                    >
+                        CLEAR
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="event-log"
+                    id="eventLog"
+                >
+
+                    <div class="log-entry">
+
+                        <span>
+                            SYS
+                        </span>
+
+                        <time>
+                            00:00:00
+                        </time>
+
+                        <p>
+                            SENSE-X command interface initialized.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="footer">
+
+        <div>
+            SENSE-X /
+            MULTIMODAL AUTONOMOUS SEARCH &amp; RESCUE
+        </div>
+
+        <div class="footer-warning">
+            <span></span>
+            REAL DATASET INFERENCE •
+            SIMULATED UAV MOTION •
+            DATASETS NOT TEMPORALLY SYNCHRONIZED
+        </div>
+
+    </footer>
+
+</div>
+
+
+<script src="/static/app.js"></script>
+
+</body>
+</html>
